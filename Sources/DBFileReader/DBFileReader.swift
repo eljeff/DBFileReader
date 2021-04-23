@@ -9,16 +9,18 @@ import Foundation
 
 // this class reads a db file, commonly a CSV or a TSV and outputs the data as arrays
 
-class DBFileReader {
+public class DBFileReader {
 
-    var dbFilePath: String?
-    var dbFileData: [[String]]?
+    public var dbFileData: [[String]]? {
+        return _dbFileData
+    }
+    private var _dbFileData: [[String]]? = nil
 
-    init(localURL: URL) {
-        dbFileData = createDataFromFile(localFileURL: localURL)
+    public init(localURL: URL) {
+        _dbFileData = createDataFromFile(localFileURL: localURL)
     }
 
-    convenience init?(localFilename: String) {
+    public convenience init?(localFilename: String) {
         if let localFile = Bundle.main.url(forResource: localFilename, withExtension: ""){
             self.init(localURL: localFile)
         } else {
